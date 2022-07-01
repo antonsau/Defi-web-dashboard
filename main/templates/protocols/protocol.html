@@ -1,0 +1,54 @@
+{% extends 'protocols/base.html' %}
+{% block content %}
+
+<h2 class="mt-2">{{protocol.protocol_name}}</h2>
+<p class="lead"></p>
+
+<div class="container">
+    <h5>Overview</h5>
+    <small>
+        <table class="table table-sm table-info table-hover table-borderless">
+            <thead>
+                <tr>
+                    <th scope="col" style="width:30%">Start date (status)</th>
+                    <th scope="col" style="width:35%">Work done</th>
+                    <th scope="col" style="width:35%">Pending tasks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{protocol.start_date}} ({% if protocol.active_status %}Active{% else %}Closed{% endif %})</td>
+                    <td>{{protocol.tasks_done}}</td>
+                    <td>{{protocol.tasks_pending}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-info table-hover table-borderless">
+            <thead>
+                <tr>
+                    <th scope="col" style="width:30%">Nodes</th>
+                    <th scope="col" style="width:35%">Testing</th>
+                    <th scope="col" style="width:35%">Deposit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{protocol.nodes_st}}</td>
+                    <td>{{protocol.testing_st}}</td>
+                    <td>{{protocol.mainnet_st}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </small>
+</div>
+
+<div class="container">
+    <h5>Team comments</h5>
+    <small>
+        <div class="card mb-1">
+          <div class="card-header">Last comment</div>
+          <div class="card-body"><p class="card-text">{{protocol.last_comment}}</p></div>
+        </div>
+    </small>
+</div>
+{% endblock content %}

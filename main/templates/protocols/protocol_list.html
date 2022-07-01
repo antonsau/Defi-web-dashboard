@@ -1,0 +1,69 @@
+{% extends 'protocols/base.html' %}
+{% block content %}
+
+<div class="row align-items-start">
+    <div class="row">
+
+        <div class="col" style="min-width:30%">
+            <h6><b>Nodes</b></h6>
+            {% for protocol in protocols_nodes %}
+            <small>
+                <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-header text-white bg-opacity-75" style="background-color: #42A7C0;">
+                        <a href="{% url 'protocol' protocol.id %}" class="list-group-item">
+                            {{protocol.protocol_name}}
+                        </a>
+                    </div>
+                    {% if protocol.last_comment != '' %}
+                    <div class="card-body">
+                        <p class="card-text">{{protocol.last_comment}}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </small>
+            {% endfor %}
+        </div>
+
+        <div class="col">
+            <h6><b>Testing</b></h6>
+            {% for protocol in protocols_testing %}
+            <small>
+                <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-header text-white bg-opacity-75" style="background-color: #42A7C0;">
+                        <a href="{% url 'protocol' protocol.id %}" class="list-group-item">
+                            {{protocol.protocol_name}}
+                        </a>
+                    </div>
+                    {% if protocol.last_comment != '' %}
+                    <div class="card-body">
+                        <p class="card-text">{{protocol.last_comment}}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </small>
+            {% endfor %}
+        </div>
+
+        <div class="col">
+            <h6><b>Deposit</b></h6>
+            {% for protocol in protocols_mainnet %}
+            <small>
+                <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+                    <div class="card-header text-white bg-opacity-75" style="background-color: #42A7C0;">
+                        <a href="{% url 'protocol' protocol.id %}" class="list-group-item">
+                            {{protocol.protocol_name}}
+                        </a>
+                    </div>
+                    {% if protocol.last_comment != '' %}
+                    <div class="card-body">
+                        <p class="card-text">{{protocol.last_comment}}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </small>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock content %}

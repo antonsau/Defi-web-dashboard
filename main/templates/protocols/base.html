@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+      <symbol id="telegram" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+      </symbol>
+    </svg>
+    <!-- Begin page content -->
+    <header class="mb-2">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+      <nav class="navbar navbar-expand-sm" style="background-color: #8FD4E5;">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">DeFi Young</span>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+              <li class="nav-item">
+                <a href="{% url 'protocols' %}?status=active" class="nav-link {% if request.GET.status == 'active' %}active{% endif %}">Active</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'protocols' %}?status=in_queue" class="nav-link {% if request.GET.status == 'in_queue' %}active{% endif %}">Pending</a>
+              <li class="nav-item">
+                <a href="{% url 'protocols' %}?status=waiting_for_updates" class="nav-link {% if request.GET.status == 'waiting_for_updates' %}active{% endif %}">WF updates</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'protocols' %}?status=waiting_for_rewards" class="nav-link {% if request.GET.status == 'waiting_for_rewards' %}active{% endif %}">WF rewards</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'protocols' %}?status=rewards_received" class="nav-link {% if request.GET.status == 'rewards_received' %}active{% endif %}">Rewards</a>
+              </li>
+              <li class="nav-item">
+                <a href="{% url 'protocols' %}?status=rewards_not_received" class="nav-link {% if request.GET.status == 'rewards_not_received' %}active{% endif %}">No rewards</a>
+              </li>
+            </ul>
+
+            <form class="d-flex" role="search">
+              <input class="form-control-sm me-2" type="search" placeholder="{% if search_input %}{{search_input}}{% else %}Protocol name{% endif %}" aria-label="Search" name="search-area" aria-label="Search">
+              <button class="btn btn-sm btn-primary " type="submit">Search</button>
+            </form>
+
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <h2 class="mt-2">Project dashboard <a href="{% url 'refresh' %}" class="btn btn-sm btn-success" role="button"><small>Refresh data</small></a></h2>
+      <p class="lead">All blockchain projects (mainly DeFi) which require investors' attention. The list is managed and updated regularly by DeFi Young team.</p>
+      <p></p><small>Please <a href="https://t.me/+1DWeFuWbSJFhNGMy">contact us</a> in case you are interested in cooperation.</small></p>
+
+      {% if request.GET.status == 'active' %}
+      <h2 class="mt-2">Active projects</h2>
+      <p class="lead">Projects in the active stage: either setting nodes, or testing app in testnet/devnet, or placing deposit.</p>
+      {% endif %}
+
+      {% if request.GET.status == 'in_queue' %}
+      <h2 class="mt-2">Pending projects</h2>
+      <p class="lead">Projects in team's queue. Waiting for additional resources, suitable moment, opportunity.</p>
+      {% endif %}
+
+      {% if request.GET.status == 'waiting_for_updates' %}
+      <h2 class="mt-2">Waiting for updates</h2>
+      <p class="lead">Monitoring news, announcements, updates from project teams to take action.</p>
+      {% endif %}
+
+      {% if request.GET.status == 'waiting_for_rewards' %}
+      <h2 class="mt-2">Waiting for rewards</h2>
+      <p class="lead">Projects with which we finished active working and which are expected to distribute airdrop (the team is in the list).</p>
+      {% endif %}
+
+      {% if request.GET.status == 'rewards_received' %}
+      <h2 class="mt-2">Rewards received</h2>
+      <p class="lead">Successful cases. Team received rewards.</p>
+      {% endif %}
+
+      {% if request.GET.status == 'rewards_not_received' %}
+      <h2 class="mt-2">Rewards not received</h2>
+      <p class="lead">Failed cases. Team didn't receive rewards (in most cases it means no profits, almost without losses).</p>
+      {% endif %}
+
+      {% block content %}
+      {% endblock content %}
+    </main>
+
+    <footer class="footer">
+      <div class="container mb-0">
+        <span class="text-muted"><small>&copy; 2022 DeFi Young</small></span>
+      </div>
+    </footer>
+
+  </body>
+
+</html>
